@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thank you | Fati Fast</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#14333b;--teal:#14434d;--mist:#e8f0f2;--sun:#f0b24a;--white:#fdfefe}
+*{box-sizing:border-box}body{margin:0;background:var(--mist);color:var(--ink);font:400 1.05rem/1.65 "Nunito Sans",system-ui,sans-serif}
+nav{height:70px;background:rgba(232,240,242,.95);box-shadow:0 2px 24px rgba(20,67,77,.12);display:flex;align-items:center;padding:0 max(24px,calc((100vw - 1112px)/2))}
+a.logo{font:800 1.6rem "Bricolage Grotesque",sans-serif;color:var(--teal);text-decoration:none}
+main{min-height:calc(100vh - 180px);display:flex;align-items:center;justify-content:center;padding:75px 24px}
+.panel{background:var(--white);border-radius:26px;padding:36px;box-shadow:0 20px 50px rgba(20,67,77,.16);max-width:650px;width:100%;text-align:center}
+h1{font:800 clamp(2rem,5vw,3rem) "Bricolage Grotesque",sans-serif;margin:0 0 18px}.btn{display:inline-block;padding:15px 30px;border-radius:50px;background:var(--sun);color:var(--ink);font-weight:700;text-decoration:none;box-shadow:0 10px 24px rgba(240,178,74,.45)}
+footer{background:var(--teal);color:#dbe9ec;padding:30px 24px;text-align:center}footer a{color:var(--sun)}a:focus-visible{outline:3px solid var(--sun);outline-offset:3px}
+</style></head>
+<body><nav><a class="logo" href="./index.html#home">⚡ Fati Fast</a></nav>
+<main><section class="panel"><h1>Thank you!</h1><p id="confirmation">Your submission has been received by the form service.</p><p>Our team will be in touch soon.</p><p style="margin-top:25px"><a class="btn" href="./index.html#home">Back to home</a></p></section></main>
+<footer>Fati Fast Truck Dispatching | <a href="mailto:fatifastbusiness.companyllc@gmail.com">fatifastbusiness.companyllc@gmail.com</a></footer>
+<script>
+const which=new URLSearchParams(location.search).get('form');
+document.getElementById('confirmation').textContent=which==='documents'
+  ? 'Your documents were accepted for submission by the form service.'
+  : 'Your message was accepted for submission by the form service.';
+</script>
+</body></html>

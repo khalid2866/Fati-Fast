@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fati Fast Truck Dispatching</title>
+<meta name="description" content="Fati Fast finds the loads, negotiates the rates and handles the paperwork for owner-operators and carriers across the USA.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#14333b;--teal:#14434d;--sage:#6f9a86;--mist:#e8f0f2;--sun:#f0b24a;--white:#fdfefe;--road:#5c7077}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font:400 1.05rem/1.65 "Nunito Sans",system-ui,sans-serif;color:var(--ink);background:var(--mist);overflow-x:hidden}
+h1,h2,h3,.logo{font-family:"Bricolage Grotesque",system-ui,sans-serif;line-height:1.1;margin:0}
+h1{font-size:clamp(2.5rem,6.4vw,4.8rem);font-weight:800;letter-spacing:-.02em}
+h2{font-size:clamp(1.9rem,4vw,3rem);font-weight:700;margin-bottom:14px}
+h3{font-size:1.25rem;margin-bottom:6px}
+p{margin:0 0 14px}
+a{color:var(--teal)}
+:focus-visible{outline:3px solid var(--sun);outline-offset:3px}
+.wrap{max-width:1160px;margin:auto;padding:0 24px}
+section{padding:90px 0}
+nav{position:fixed;inset:0 0 auto;z-index:50;background:rgba(232,240,242,.88);backdrop-filter:blur(12px);box-shadow:0 2px 24px rgba(20,67,77,.12)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:70px;gap:12px}
+.logo{font-size:1.6rem;font-weight:800;color:var(--teal);text-decoration:none;display:flex;align-items:center;gap:8px}
+.logo svg{width:30px;animation:bolt 3s ease-in-out infinite}
+@keyframes bolt{50%{transform:translateX(5px) skewX(-8deg)}}
+nav .links a{margin-left:24px;color:var(--ink);text-decoration:none;font-weight:700;padding:6px 0;border-bottom:3px solid transparent;transition:.3s}
+nav .links a:hover,nav .links a.on{border-color:var(--sun)}
+.btn{display:inline-block;padding:15px 30px;border-radius:50px;background:var(--sun);color:var(--ink);font:700 1rem "Nunito Sans",sans-serif;text-decoration:none;border:0;cursor:pointer;box-shadow:0 10px 24px rgba(240,178,74,.45);transition:transform .3s,box-shadow .3s}
+.btn:hover{transform:translateY(-4px) scale(1.03);box-shadow:0 16px 30px rgba(240,178,74,.55)}
+.btn.alt{background:var(--teal);color:#fff;box-shadow:0 10px 24px rgba(20,67,77,.35)}
+.view{display:none}.view.active{display:block;animation:pg .7s ease}
+@keyframes pg{from{opacity:0;transform:translateY(24px)}}
+/* hero */
+.hero{position:relative;min-height:100vh;padding:120px 0 0;overflow:hidden;background:linear-gradient(180deg,#a9d0e0 0%,#d7e8ee 55%,#f4e6c8 100%)}
+.hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.35}
+.cloud{position:absolute;height:46px;width:170px;border-radius:50px;background:#fff;opacity:.7;filter:blur(2px);animation:drift 45s linear infinite}
+.cloud:nth-of-type(2){top:22%;animation-duration:70s;animation-delay:-30s;width:220px}
+.cloud:nth-of-type(3){top:55%;animation-duration:55s;animation-delay:-12s}
+@keyframes drift{from{transform:translateX(-300px)}to{transform:translateX(110vw)}}
+.hero .wrap{position:relative;text-align:center}
+.hero p.lead{max-width:640px;margin:22px auto 30px;font-size:1.2rem}
+.hero .cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.scene{height:330px;margin-top:50px;perspective:1400px;perspective-origin:50% 35%}
+.pivot{transform-style:preserve-3d;transition:transform .4s ease-out;height:100%}
+.ring{position:relative;height:100%;transform-style:preserve-3d;animation:spin 38s linear infinite}
+.scene:hover .ring{animation-play-state:paused}
+@keyframes spin{to{transform:rotateY(-360deg)}}
+.rc{position:absolute;left:50%;top:10px;width:250px;margin-left:-125px;transform:rotateY(calc(var(--i)*40deg)) translateZ(350px);border-radius:18px;overflow:hidden;background:var(--white);box-shadow:0 18px 40px rgba(20,67,77,.3);border:5px solid var(--white)}
+.rc img{width:100%;height:160px;object-fit:cover;display:block}
+.rc span{display:block;padding:8px 10px;font:700 .95rem "Bricolage Grotesque",sans-serif;text-align:center}
+.road{height:54px;background:var(--road);position:relative;overflow:hidden;margin-top:-6px}
+.road:after{content:"";position:absolute;left:0;right:0;top:25px;height:5px;background:linear-gradient(90deg,#fff 44px,transparent 44px) 0 0/96px 5px repeat-x;animation:dash 1s linear infinite}
+@keyframes dash{to{background-position:-96px 0}}
+/* cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:26px;perspective:1000px;margin-top:40px}
+.sc{background:var(--white);border-radius:22px;overflow:hidden;box-shadow:0 16px 40px rgba(20,67,77,.16);transition:transform .15s ease-out}
+.sc img{width:100%;height:175px;object-fit:cover;display:block}
+.sc div{padding:18px 22px 22px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:28px;margin-top:40px}
+.step{padding:30px;border-radius:22px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25)}
+.step b{display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:var(--sun);color:var(--ink);font:800 1.2rem "Bricolage Grotesque";margin-bottom:14px}
+.band{background:var(--teal);color:#fff}.band a{color:var(--sun)}
+.reveal{opacity:0;transform:translateY(40px) rotateX(12deg);transition:opacity 1s,transform 1s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+/* about */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+.stack{position:relative;height:420px;perspective:1000px}
+.stack img{position:absolute;width:78%;border-radius:20px;box-shadow:0 20px 50px rgba(20,67,77,.3);border:6px solid var(--white)}
+.stack img:first-child{left:0;top:0;transform:rotateY(14deg) rotateZ(-3deg);animation:fl 7s ease-in-out infinite}
+.stack img:last-child{right:0;bottom:0;transform:rotateY(-14deg) rotateZ(3deg);animation:fl 7s ease-in-out -3.5s infinite}
+@keyframes fl{50%{translate:0 -16px}}
+.vals{display:grid;gap:14px;margin-top:20px}.vals div{background:var(--white);padding:16px 20px;border-radius:16px;border-left:6px solid var(--sage)}
+/* forms */
+.panel{background:var(--white);border-radius:26px;padding:36px;box-shadow:0 20px 50px rgba(20,67,77,.16)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+label.f{display:block;margin-bottom:16px;font-weight:700}
+input[type=text],input[type=email],input[type=tel],select,textarea{width:100%;margin-top:6px;padding:13px 15px;border:2px solid #cddbd6;border-radius:12px;font:inherit;color:var(--ink);background:#f6fafa;transition:.25s}
+input:focus,select:focus,textarea:focus{border-color:var(--sage);box-shadow:0 0 0 4px rgba(111,154,134,.25);outline:0}
+.up{display:block;position:relative;margin-bottom:16px;padding:18px 20px;border:2px dashed var(--sage);border-radius:16px;background:#f1f7f3;cursor:pointer;transition:.3s}
+.up:hover{transform:translateY(-3px);border-color:var(--sun)}
+.up input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%}
+.up b{display:block}.up small{display:block;color:#4d6a70}.up span{display:block;margin-top:4px;color:var(--teal);font-weight:700}
+.up.done{border-style:solid;border-color:#4f8f63;background:#e2f1e5}.up.done span:before{content:"\2713  "}
+.msg{margin-top:16px;font-weight:700}.msg.ok{color:#2f7a48}.msg.err{color:#a4452f}
+.info{display:grid;gap:16px}.info .sc{padding:22px}
+footer{background:var(--teal);color:#dbe9ec;padding:40px 0;text-align:center}footer a{color:var(--sun)}
+@media(max-width:800px){.split,.row{grid-template-columns:1fr}.stack{height:340px}nav .links a{margin-left:14px;font-size:.92rem}.logo{font-size:1.3rem}.scene{transform:scale(.55);transform-origin:top center;height:200px}section{padding:64px 0}.panel{padding:24px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+<a class="logo" href="#home"><svg viewBox="0 0 40 40"><path d="M23 2 8 22h10l-3 16 17-22H21z" fill="#f0b24a"/></svg>Fati Fast</a>
+<div class="links"><a href="#home">Home</a><a href="#about">About</a><a href="#contact">Contact</a></div>
+</div></nav>
+
+<main>
+<!-- HOME -->
+<div class="view" id="home">
+<header class="hero">
+<video autoplay muted loop playsinline poster="images/poweronly.jpg"><source src="images/hero.mp4" type="video/mp4" onerror="this.parentNode.remove()"></video>
+<div class="cloud" style="top:12%"></div><div class="cloud"></div><div class="cloud"></div>
+<div class="wrap">
+<h1>You drive.<br>We find the freight.</h1>
+<p class="lead">Fati Fast finds the loads, negotiates the rates and handles the paperwork, so you can focus on driving anywhere in the USA.</p>
+<div class="cta"><a class="btn" href="#contact">Talk to a dispatcher</a><a class="btn alt" href="#documents">Upload your documents</a></div>
+<div class="scene"><div class="pivot" id="pivot"><div class="ring" id="ring"></div></div></div>
+</div>
+<div class="road"></div>
+</header>
+<section><div class="wrap">
+<h2 class="reveal">Dispatch for every kind of truck</h2>
+<p class="reveal">Box trucks to flatbeds, we book freight for carriers of all sizes, on lanes across the country.</p>
+<div class="grid" id="grid"></div>
+</div></section>
+<section class="band"><div class="wrap">
+<h2 class="reveal">Here is what we take off your plate</h2>
+<div class="steps">
+<div class="step reveal"><b>1</b><h3>We find the loads</h3><p>We search the boards and our broker contacts for freight that fits your truck and your lane.</p></div>
+<div class="step reveal"><b>2</b><h3>We negotiate the rates</h3><p>We haggle with brokers so you are paid fairly for every mile you haul.</p></div>
+<div class="step reveal"><b>3</b><h3>We handle the paperwork</h3><p>Rate confirmations, packets and onboarding forms are ours to chase, not yours.</p></div>
+</div>
+<p class="reveal" style="margin-top:40px">Ready to start? <a href="#documents">Send your carrier documents</a> or <a href="tel:+19092654696">call (909) 265-4696</a>.</p>
+</div></section>
+</div>
+
+<!-- ABOUT -->
+<div class="view" id="about"><section style="padding-top:140px"><div class="wrap split">
+<div class="stack"><img src="images/reefer.jpg" alt="Reefer van trailer parked at a warehouse"><img src="images/hotshot.jpg" alt="RAM hot shot truck with gooseneck trailer at sunset"></div>
+<div>
+<h2>Dispatch built around the driver</h2>
+<p>Fati Fast is a truck dispatching company for owner-operators and small fleets. We work with box trucks, dry vans, flatbeds, hot shots, reefers, power only, gooseneck, step deck, sprinter and cargo vans.</p>
+<p>Our job is simple: keep your truck loaded and your paperwork in order, with a real person you can call when something changes on the road.</p>
+<div class="vals">
+<div><h3>Clear communication</h3>You always know the rate, the lane and the broker before you say yes.</div>
+<div><h3>Your truck, your choice</h3>You decide which loads you run. We bring the options and do the legwork.</div>
+<div><h3>Nationwide coverage</h3>We dispatch carriers running all over the USA.</div>
+</div>
+<p style="margin-top:24px"><a class="btn" href="#contact">Get in touch</a></p>
+</div></div></section></div>
+
+<!-- CONTACT -->
+<div class="view" id="contact"><section style="padding-top:140px"><div class="wrap">
+<h2>Let’s get your truck moving</h2>
+<p>Tell us about your equipment and we will reach out with loads that fit.</p>
+<div class="split" style="align-items:start;margin-top:30px">
+<form class="panel" method="POST" action="https://formsubmit.co/fatifastbusiness.companyllc@gmail.com" enctype="multipart/form-data">
+<input type="hidden" name="form_type" value="contact"><input type="hidden" name="_subject" value="Fati Fast — New contact message"><input type="hidden" name="_template" value="table"><input type="hidden" name="_captcha" value="false"><input type="hidden" name="_next" value=""><input name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+<div class="row"><label class="f">Full name<input type="text" name="name" required autocomplete="name"></label><label class="f">Phone<input type="tel" name="phone" required autocomplete="tel"></label></div>
+<div class="row"><label class="f">Email<input type="email" name="email" required autocomplete="email"></label><label class="f">MC or DOT number<input type="text" name="mc_dot_number"></label></div>
+<label class="f">Equipment type<select name="equipment_type" required><option value="">Choose your truck</option><option>Box Truck</option><option>Dry Van</option><option>Flatbed</option><option>Flatbed HotShot</option><option>Reefer Van</option><option>Power Only</option><option>Gooseneck</option><option>Step Deck</option><option>Sprinter</option><option>Cargo Van</option></select></label>
+<label class="f">How can we help?<textarea name="message" rows="4"></textarea></label>
+<button class="btn" type="submit">Send message</button><div class="msg" role="status" aria-live="polite"></div>
+</form>
+<div class="info">
+<a class="sc" style="padding:22px;text-decoration:none;color:inherit" href="mailto:fatifastbusiness.companyllc@gmail.com"><h3>Email us</h3>fatifastbusiness.companyllc@gmail.com</a>
+<a class="sc" style="padding:22px;text-decoration:none;color:inherit" href="tel:+19092654696"><h3>Call or text</h3>(909) 265-4696</a>
+<div class="sc" style="background:var(--teal);color:#fff;padding:22px"><h3>Ready to onboard?</h3><p>Upload your MC authority letter, W-9, insurance certificate and payment form.</p><a class="btn" href="#documents">Upload documents</a></div>
+</div></div>
+</div></section></div>
+
+<!-- DOCUMENTS -->
+<div class="view" id="documents"><section style="padding-top:140px"><div class="wrap" style="max-width:760px">
+<h2>Upload your carrier documents</h2>
+<p>We accept PDF, JPG, PNG, DOC and DOCX files, up to 10 MB combined across all four documents.</p>
+<p style="font-size:.9rem">Documents are processed by a third-party form service and delivered by email. Avoid including unnecessary sensitive information.</p>
+<form class="panel" method="POST" action="https://formsubmit.co/fatifastbusiness.companyllc@gmail.com" enctype="multipart/form-data" style="margin-top:26px">
+<input type="hidden" name="form_type" value="documents"><input type="hidden" name="_subject" value="Fati Fast — New carrier documents"><input type="hidden" name="_template" value="table"><input type="hidden" name="_next" value=""><input name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+<div class="row"><label class="f">Driver or company name<input type="text" name="name" required></label><label class="f">Phone<input type="tel" name="phone" required></label></div>
+<label class="f">Email<input type="email" name="email" required></label>
+<label class="up"><input type="file" name="mc_authority_letter" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" required><b>MC Authority Letter</b><span>Choose a file or drop it here</span></label>
+<label class="up"><input type="file" name="w9_form" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" required><b>W-9 Form</b><span>Choose a file or drop it here</span></label>
+<label class="up"><input type="file" name="certificate_of_insurance" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" required><b>Certificate of Insurance (COI)</b><span>Choose a file or drop it here</span></label>
+<label class="up"><input type="file" name="noa_or_voided_check" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" required><b>Notice of Assignment or Voided Check</b><small>Notice of Assignment if you use factoring, Voided Check if you use Quick Pay</small><span>Choose a file or drop it here</span></label>
+<button class="btn" type="submit">Submit documents</button><div class="msg" role="status" aria-live="polite"></div>
+</form></div></section></div>
+</main>
+
+<footer><div class="wrap"><p><b>Fati Fast Truck Dispatching</b><br>
+<a href="mailto:fatifastbusiness.companyllc@gmail.com">fatifastbusiness.companyllc@gmail.com</a> | <a href="tel:+19092654696">(909) 265-4696</a></p>
+<p style="margin:0;font-size:.9rem">&copy; <span id="yr"></span> Fati Fast. Dispatching carriers across the USA.</p></div></footer>
+
+<script>
+const F=[["Box Truck","boxtruck","Local and regional freight for straight trucks, liftgate loads included."],["Dry Van","dryvan","Palletized and packaged freight on 53-foot dry van lanes."],["Flatbed","flatbed","Steel, lumber and machinery with the right tarp and strap loads."],["Flatbed HotShot","hotshot","Fast, time-sensitive loads for 40-foot hot shot rigs."],["Reefer Van","reefer","Temperature-controlled freight for food and medical shippers."],["Power Only","poweronly","Pull a customer’s trailer and keep your tractor earning."],["Gooseneck","gooseneck","Heavy equipment and oversize hauls on gooseneck trailers."],["Step Deck","stepdeck","Tall freight that needs a lower deck for legal height."],["Sprinter and Cargo Van","sprinter","Expedited and last-mile freight for vans of every size."]];
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+$('#ring').innerHTML=F.map((f,i)=>`<div class="rc" style="--i:${i}"><img src="images/${f[1]}.jpg" alt="${f[0]}"><span>${f[0]}</span></div>`).join('');
+$('#grid').innerHTML=F.map(f=>`<article class="sc reveal"><img src="images/${f[1]}.jpg" alt="${f[0]}" loading="lazy"><div><h3>${f[0]}</h3><p>${f[2]}</p></div></article>`).join('');
+$('#yr').textContent=new Date().getFullYear();
+/* router */
+const io=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&(x.target.classList.add('in'),io.unobserve(x.target))),{threshold:.15});
+function route(){let h=location.hash.slice(1)||'home';if(!$('#'+h+'.view'))h='home';
+$$('.view').forEach(v=>v.classList.toggle('active',v.id===h));
+$$('nav .links a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+(h==='documents'?'contact':h)));
+scrollTo(0,0);$$('.view.active .reveal:not(.in)').forEach(r=>io.observe(r));}
+addEventListener('hashchange',route);route();
+/* 3D tilt on cards and hero ring */
+document.addEventListener('mousemove',e=>{const c=e.target.closest&&e.target.closest('.sc');
+if(c){const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform=`rotateX(${-y*12}deg) rotateY(${x*14}deg) translateZ(12px)`}
+$$('.sc').forEach(s=>{if(s!==c&&s.classList.contains('in'))s.style.transform=''});
+$('#pivot').style.transform=`rotateX(${(e.clientY/innerHeight-.5)*-10}deg)`});
+/* File selection uses the existing styling, with the provider's total upload limit. */
+const maxTotalBytes = 10 * 1024 * 1024;
+$$('.up input').forEach(i=>i.addEventListener('change',()=>{
+  const file=i.files[0],label=i.parentNode.querySelector('span');
+  if(file && file.size>maxTotalBytes){
+    i.value='';label.textContent='That file is over 10 MB. Choose a smaller one.';
+    i.parentNode.classList.remove('done');return;
+  }
+  label.textContent=file?file.name:'Choose a file or drop it here';
+  i.parentNode.classList.toggle('done',!!file);
+}));
+
+const formContact = $('#contact form');
+const formDocs = $('#documents form');
+// Absolute URLs are required for FormSubmit's redirect; this works for project
+// Pages (user.github.io/repository/) and sites with their own domain.
+formContact.elements.namedItem('_next').value=new URL('thanks.html?form=contact',location.href).href;
+formDocs.elements.namedItem('_next').value=new URL('thanks.html?form=documents',location.href).href;
+
+// AJAX is documented for text-based contact forms and preserves this page's UI.
+formContact.addEventListener('submit',async e=>{
+  e.preventDefault();
+  const form=formContact,b=form.querySelector('[type=submit]'),m=form.querySelector('.msg');
+  const original=b.textContent;
+  m.className='msg';m.textContent='';b.disabled=true;b.textContent='Sending…';
+  try{
+    const fields=Object.fromEntries(new FormData(form));
+    const response=await fetch('https://formsubmit.co/ajax/fatifastbusiness.companyllc@gmail.com',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify(fields)
+    });
+    let result;
+    try{result=await response.json()}catch(_){throw new Error('The form service returned an unexpected response. Please try again.');}
+    // FormSubmit sometimes returns HTTP 200 with success: "false", a truthy string.
+    if(!response.ok || String(result.success).toLowerCase()!=='true'){
+      if(/activat/i.test(String(result.message||''))){
+        throw new Error('Email notifications need activation. Fati Fast must open the confirmation email from FormSubmit first.');
+      }
+      throw new Error(result.message||'The form service did not accept your message.');
+    }
+    m.className='msg ok';
+    m.textContent='Thank you. Your message was submitted successfully. We will be in touch soon.';
+    form.reset();
+  }catch(error){
+    m.className='msg err';
+    m.textContent=(error.message||'The message could not be submitted.')+' You can also email ';
+    const email=document.createElement('a');
+    email.href='mailto:fatifastbusiness.companyllc@gmail.com';
+    email.textContent='fatifastbusiness.companyllc@gmail.com';
+    m.append(email,'.');
+  }finally{b.disabled=false;b.textContent=original;}
+});
+
+// Use a regular multipart POST for file attachments. FormSubmit does not
+// document attachment support through its JSON AJAX endpoint.
+formDocs.addEventListener('submit',e=>{
+  const m=formDocs.querySelector('.msg');m.className='msg';m.textContent='';
+  const files=[...formDocs.querySelectorAll('input[type=file]')].map(i=>i.files[0]);
+  if(files.some(file=>!file)){
+    e.preventDefault();m.className='msg err';
+    m.textContent='Please attach all four required documents.';return;
+  }
+  if(files.reduce((size,file)=>size+file.size,0)>maxTotalBytes){
+    e.preventDefault();m.className='msg err';
+    m.textContent='The four documents exceed the 10 MB total limit. Please choose smaller files.';return;
+  }
+  const button=formDocs.querySelector('[type=submit]');
+  button.disabled=true;button.textContent='Submitting…';
+  m.textContent='Uploading documents securely over HTTPS. Please wait for the confirmation page.';
+  // The native form submission proceeds and FormSubmit handles the response.
+});
+// Restore controls if the visitor uses the Back button after navigation.
+addEventListener('pageshow',()=>{
+  const button=formDocs.querySelector('[type=submit]');
+  button.disabled=false;button.textContent='Submit documents';
+});
+</script>
+</body>
+</html>
